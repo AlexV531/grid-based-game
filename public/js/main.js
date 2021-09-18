@@ -172,11 +172,16 @@ function update() {
 	updateCamera(deltaT)
 	
 	if(placeObstruction) {
-		console.log("hello")
-		tileMap.getTileAt(mouseTile.x, mouseTile.y).obstructed = true
+		let obsTile = tileMap.getTileAt(mouseTile.x, mouseTile.y)
+		if(obsTile != null) {
+			obsTile.obstructed = true
+		}
 	}
 	else if(removeObstruction) {
-		tileMap.getTileAt(mouseTile.x, mouseTile.y).obstructed = false
+		let obsTile = tileMap.getTileAt(mouseTile.x, mouseTile.y)
+		if(obsTile != null) {
+			obsTile.obstructed = false
+		}
 	}
 
 	testObject.update(deltaT)

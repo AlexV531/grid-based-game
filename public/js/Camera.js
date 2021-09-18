@@ -35,7 +35,6 @@ function handleKeyDown(e) {
 
 /** @param {KeyboardEvent} e */
 function handleKeyUp(e) {
-	console.log("Hello from handleKeyUp in Camera.js")
 	let code = e.keyCode
 	// Up
 	if(code === 38) {
