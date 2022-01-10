@@ -1,4 +1,4 @@
-# Tile Map 2
+# Grid Based Game
 
 This is a basic A* Pathfinding demonstration with the ability to control a character who can move around the level.
 
