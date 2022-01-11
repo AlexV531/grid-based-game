@@ -1,6 +1,6 @@
 # Grid Based Game
 
-This is a basic A* Pathfinding demonstration with the ability to control a character who can move around the level.
+This is the start of a game using my A* pathfinding demo
 
 ## Install
 
