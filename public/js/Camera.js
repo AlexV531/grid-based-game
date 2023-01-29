@@ -1,13 +1,15 @@
 export let pos = {
 	x:0, y:0
 }
-const maxSpeed = 0.4
+const maxSpeed = 0.0003
 let speed = {
 	left:0, right:0,
 	up:0, down:0
 }
+let canvas
 
-export function initCamera() {
+export function initCamera(cnvs) {
+	canvas = cnvs
 	window.addEventListener('keydown', handleKeyDown)
 	window.addEventListener('keyup', handleKeyUp)
 }
@@ -56,7 +58,7 @@ function handleKeyUp(e) {
 
 export function updateCamera(deltaTime) {
 	// Update the camera's position
-	pos.x = pos.x + (speed.left + speed.right) * maxSpeed * deltaTime
-	pos.y = pos.y + (speed.up + speed.down) * maxSpeed * deltaTime
+	pos.x = pos.x + (speed.left + speed.right) * maxSpeed * deltaTime * canvas.width
+	pos.y = pos.y + (speed.up + speed.down) * maxSpeed * deltaTime * canvas.height
 }
 

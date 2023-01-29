@@ -2,6 +2,7 @@ import { loadAssets } from './assets.js'
 import SpriteComponent from './components/SpriteComponent.js'
 import TestComponent from './components/TestComponent.js'
 import MoveComponent from './components/MoveComponent.js'
+import PlayerComponent from './components/PlayerComponent.js'
 import GameObject from './GameObject.js'
 import { findPath } from './world/Pathfinding.js'
 import TileMap from './world/TileMap.js'
@@ -129,14 +130,15 @@ async function initApp() {
 	window.addEventListener('mousemove', handleMouseMove)
 	window.addEventListener('click', handleClick)
 
-	initCamera()
+	initCamera(canvas)
 
 	const assets = await loadAssets()
 	tileMap = new TileMap(20, 0.4, assets[0])
 	let testComponent = new TestComponent()
 	let spriteComponent = new SpriteComponent(assets[1])
 	let moveComponent = new MoveComponent(tileMap)
-	testObject = new GameObject("test", 2, 2, [testComponent, spriteComponent, moveComponent])
+	let playerComponent = new PlayerComponent()
+	testObject = new GameObject("test", 2, 2, [testComponent, spriteComponent, moveComponent, playerComponent])
 }
 
 /** Render the scene */
