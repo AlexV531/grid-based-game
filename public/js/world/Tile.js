@@ -8,6 +8,7 @@ export default class Tile {
 		this.gCost = 0
 		this.hCost = 0
 		this.parent = null
+		this.imageIndex = 0
 	}
 
 	getX() {
@@ -24,5 +25,9 @@ export default class Tile {
 
 	getFCost() {
 		return this.gCost + this.hCost
+	}
+
+	getImageIndex() {
+		return this.imageIndex
 	}
 }

@@ -52,6 +52,10 @@ export default class MoveComponent extends Component {
 
 	update(deltaTime) {
 		if(this.moving) {
+			if(this.path[this.nextNodeIndex].isObstructed() == true) {
+				this.move(this.target.x, this.target.y)
+				return
+			}
 			// Calculates the distance To Travel in one frame
 			let distTT = this.speed * deltaTime
 			while(true) {

@@ -1,12 +1,14 @@
 import { loadAssets } from './assets.js'
-import SpriteComponent from './components/SpriteComponent.js'
-import TestComponent from './components/TestComponent.js'
+//import SpriteComponent from './components/SpriteComponent.js'
+//import TestComponent from './components/TestComponent.js'
 import MoveComponent from './components/MoveComponent.js'
-import PlayerComponent from './components/PlayerComponent.js'
-import GameObject from './GameObject.js'
+//import PlayerComponent from './components/PlayerComponent.js'
+//import GameObject from './GameObject.js'
 import { findPath } from './world/Pathfinding.js'
-import TileMap from './world/TileMap.js'
+//import tileMap from './world/level.tileMap.js'
 import { pos, initCamera, updateCamera,  } from './Camera.js'
+import Renderer from './Renderer.js'
+import Level from './world/Level.js'
 
 /** @type {HTMLCanvasElement} */
 const canvas = document.querySelector('canvas.main-canvas')
@@ -24,7 +26,7 @@ const SCALE = 10.0
 /** Background */
 const BG_COLOR = '#000000'
 /** Tile Map */
-let tileMap
+//let tileMap
 /** Pathfinding testers */
 let startTest = {
 	x:null, y:null
@@ -44,6 +46,9 @@ let removeObstruction = false
 
 let testObject
 let testOnce = true
+
+let level
+let renderer
 
 //let count = 0
 
@@ -86,36 +91,36 @@ function handleMouseMove(e) {
 		y:-(e.clientY + pos.y - viewport.height) / (viewport.width / SCALE)
 	}
 	mouseTile = {
-		x:Math.floor(mouse.x / tileMap.getTileWidth()),
-		y:Math.floor(mouse.y / tileMap.getTileWidth())
+		x:Math.floor(mouse.x / level.tileMap.getTileWidth()),
+		y:Math.floor(mouse.y / level.tileMap.getTileWidth())
 	}
 }
 
 /** @param {MouseEvent} e */
 function handleClick(e) {
-	if(!(mouseTile.x < 0 || mouseTile.y < 0 || mouseTile.x > tileMap.getMapSizeX() || mouseTile.y > tileMap.getMapSizeY())) {
+	if(!(mouseTile.x < 0 || mouseTile.y < 0 || mouseTile.x > level.tileMap.getMapSizeX() || mouseTile.y > level.tileMap.getMapSizeY())) {
 		// Move player
 		if(e.shiftKey) {
-			testObject.getComponent(MoveComponent).move(mouseTile.x, mouseTile.y)
+			level.gameObjects[0].getComponent(MoveComponent).move(mouseTile.x, mouseTile.y)
 			return
 		}
 		// Pathfinding tester
 		if(startTest.x === null) {
 			startTest.x = mouseTile.x
 			startTest.y = mouseTile.y
-			tileMap.start.x = mouseTile.x
-			tileMap.start.y = mouseTile.y
-			tileMap.testPath = []
+			level.tileMap.start.x = mouseTile.x
+			level.tileMap.start.y = mouseTile.y
+			level.tileMap.testPath = []
 		} else if(targetTest.x === null) {
 			targetTest.x = mouseTile.x
 			targetTest.y = mouseTile.y
-			tileMap.testPath = findPath(tileMap, startTest.x, startTest.y, targetTest.x, targetTest.y)
+			level.tileMap.testPath = findPath(level.tileMap, startTest.x, startTest.y, targetTest.x, targetTest.y)
 		} else {
 			startTest.x = mouseTile.x
 			startTest.y = mouseTile.y
-			tileMap.start.x = mouseTile.x
-			tileMap.start.y = mouseTile.y
-			tileMap.testPath = []
+			level.tileMap.start.x = mouseTile.x
+			level.tileMap.start.y = mouseTile.y
+			level.tileMap.testPath = []
 			targetTest.x = null
 		}
 	}
@@ -133,15 +138,21 @@ async function initApp() {
 	initCamera(canvas)
 
 	const assets = await loadAssets()
-	tileMap = new TileMap(20, 0.4, assets[0])
+	// All commented out content here handled by Level class
+	/*
+	tileMap = new tileMap(20, 0.4)
 	let testComponent = new TestComponent()
 	let spriteComponent = new SpriteComponent(assets[1])
 	let moveComponent = new MoveComponent(tileMap)
 	let playerComponent = new PlayerComponent()
 	testObject = new GameObject("test", 2, 2, [testComponent, spriteComponent, moveComponent, playerComponent])
+	*/
+	level = new Level("test.json")
+	renderer = new Renderer(level, assets, context)
 }
 
 /** Render the scene */
+// NEED RENDERER CLASS
 function render() {
 	// Clear the screen
 	context.beginPath()
@@ -156,11 +167,14 @@ function render() {
 	context.scale(viewport.width / SCALE, -viewport.width / SCALE)
 	context.getTransform()
 
-	// Draw the tile map
-	tileMap.render(context)
+	// Update the tile map (should be done in level)
+	
+
+	// Render the level (should just be the level.tileMap for now but will add gameobjects when level class is complete)
+	renderer.render()
 
 	//console.log(mouse.x + " | " + mouse.y)
-	testObject.render(context)
+	//testObject.render(context)
 
 	context.restore()
 }
@@ -174,19 +188,20 @@ function update() {
 	updateCamera(deltaT)
 	
 	if(placeObstruction) {
-		let obsTile = tileMap.getTileAt(mouseTile.x, mouseTile.y)
+		let obsTile = level.tileMap.getTileAt(mouseTile.x, mouseTile.y)
 		if(obsTile != null) {
 			obsTile.obstructed = true
 		}
 	}
 	else if(removeObstruction) {
-		let obsTile = tileMap.getTileAt(mouseTile.x, mouseTile.y)
+		let obsTile = level.tileMap.getTileAt(mouseTile.x, mouseTile.y)
 		if(obsTile != null) {
 			obsTile.obstructed = false
 		}
 	}
 
-	testObject.update(deltaT)
+	level.update(deltaT)
+	//testObject.update(deltaT)
 
 	if(testOnce) {
 		testOnce = false
