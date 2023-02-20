@@ -52,7 +52,7 @@ export default class Renderer {
 			// Loop through each game object, check if it is on the current row
 			// If so, render it
 			for(let i = 0; i < this.gameObjects.length; i++) {
-				if(Math.floor(this.gameObjects[i].x / width)  == y) {
+				if(Math.floor(this.gameObjects[i].y / width)  == y) {
 					let spriteIndex = this.gameObjects[i].getComponent(SpriteComponent).sprite
 					this.context.drawImage(this.assets[spriteIndex], this.gameObjects[i].x, this.gameObjects[i].y, width, width)
 				}
