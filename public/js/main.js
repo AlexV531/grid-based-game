@@ -22,7 +22,7 @@ const viewport = {
 let prevT = Date.now()
 
 /** Scene scaling */
-const SCALE = 10.0
+export const SCALE = 10.0
 /** Background */
 const BG_COLOR = '#000000'
 /** Tile Map */
@@ -138,17 +138,8 @@ async function initApp() {
 	initCamera(canvas)
 
 	const assets = await loadAssets()
-	// All commented out content here handled by Level class
-	/*
-	tileMap = new tileMap(20, 0.4)
-	let testComponent = new TestComponent()
-	let spriteComponent = new SpriteComponent(assets[1])
-	let moveComponent = new MoveComponent(tileMap)
-	let playerComponent = new PlayerComponent()
-	testObject = new GameObject("test", 2, 2, [testComponent, spriteComponent, moveComponent, playerComponent])
-	*/
 	level = new Level("test.json")
-	renderer = new Renderer(level, assets, context)
+	renderer = new Renderer(level, assets, context, canvas)
 }
 
 /** Render the scene */
@@ -164,7 +155,10 @@ function render() {
 	context.save()
 	context.translate(pos.x, viewport.height - pos.y)
 	//console.log(viewport.height)
+	//context.scale(viewport.width / SCALE, -viewport.width / SCALE)
+	//TEST
 	context.scale(viewport.width / SCALE, -viewport.width / SCALE)
+	//TESTEND
 	context.getTransform()
 
 	// Update the tile map (should be done in level)

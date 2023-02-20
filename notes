@@ -1,0 +1,5 @@
+FORMULA TO GO FROM PIXELS TO GAME UNITS: pixels / (canvas.width/SCALE) = game units
+
+FORMULA TO GO FROM GAME UNITS TO TILE CO-ORDS: game units / tile width = tile co-ords
+
+TILE MAP (0, 0) SHOULD/WILL ALWAYS BE AT GAME UNIT (0, 0)

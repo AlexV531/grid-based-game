@@ -59,6 +59,6 @@ function handleKeyUp(e) {
 export function updateCamera(deltaTime) {
 	// Update the camera's position
 	pos.x = pos.x + (speed.left + speed.right) * maxSpeed * deltaTime * canvas.width
-	pos.y = pos.y + (speed.up + speed.down) * maxSpeed * deltaTime * canvas.height
+	pos.y = pos.y + (speed.up + speed.down) * maxSpeed * deltaTime * canvas.width
 }
 
