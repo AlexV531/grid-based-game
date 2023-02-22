@@ -31,12 +31,17 @@ export default class Renderer {
 		// That way elements in front of other elements will be drawn correctly
 		this.context.fillStyle = '#FFFFFF'
 		let width = this.tileMap.tileWidth
+		// This buffer makes the renderer draw tiles and game objects 2 tiles off screen to 
+		// avoid game objects disappearing if their origin point is off screen
+		let buffer = 2
 		
 		// Only render things that are visible to the camera
-		let yStart = Math.floor(((-pos.y + this.canvas.height) / (this.canvas.width / SCALE)) / width)
-		let yEnd = Math.floor((-pos.y / (this.canvas.width / SCALE)) / width)
-		let xStart = Math.floor((-pos.x / (this.canvas.width / SCALE)) / width)
-		let xEnd = Math.floor(((-pos.x + this.canvas.width) / (this.canvas.width / SCALE)) / width)
+		let yStart = Math.floor(((-pos.y + this.canvas.height) / (this.canvas.width / SCALE)) / width) + buffer
+		let yEnd = Math.floor((-pos.y / (this.canvas.width / SCALE)) / width) - buffer
+		let xStart = Math.floor((-pos.x / (this.canvas.width / SCALE)) / width) - buffer
+		let xEnd = Math.floor(((-pos.x + this.canvas.width) / (this.canvas.width / SCALE)) / width) + buffer
+		// yStart is at the top of the canvas, yEnd is at the bottom.
+		// xStart is at the left side of the canvas, xEnd is at the right.
 
 		// Loop through each row that is visible on the screen
 		for(let y = yStart; y >= yEnd; y--) {
@@ -52,7 +57,7 @@ export default class Renderer {
 			// Loop through each game object, check if it is on the current row
 			// If so, render it
 			for(let i = 0; i < this.gameObjects.length; i++) {
-				if(Math.floor(this.gameObjects[i].y / width)  == y) {
+				if(Math.floor(this.gameObjects[i].y / width)  == y && Math.floor(this.gameObjects[i].x / width) > xStart && Math.floor(this.gameObjects[i].x / width) < xEnd) {
 					let spriteIndex = this.gameObjects[i].getComponent(SpriteComponent).sprite
 					this.context.drawImage(this.assets[spriteIndex], this.gameObjects[i].x, this.gameObjects[i].y, width, width)
 				}
