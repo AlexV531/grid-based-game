@@ -8,10 +8,4 @@ export default class SpriteComponent extends Component {
 		console.log("Sprite Component created")
 		console.log(this.sprite)
 	}
-
-	/*
-	render(context) {
-		context.drawImage(this.sprite, this.parent.x, this.parent.y, 0.4, 0.4)
-	}
-	*/
 }

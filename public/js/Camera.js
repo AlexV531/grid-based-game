@@ -1,64 +1,19 @@
+import { keys } from './InputManager.js'
+
 export let pos = {
 	x:0, y:0
 }
-const maxSpeed = 0.0003
-let speed = {
-	left:0, right:0,
-	up:0, down:0
-}
+let speed = 0.0003
 let canvas
 
 export function initCamera(cnvs) {
 	canvas = cnvs
-	window.addEventListener('keydown', handleKeyDown)
-	window.addEventListener('keyup', handleKeyUp)
-}
-
-/** @param {KeyboardEvent} e */
-function handleKeyDown(e) {
-	let code = e.keyCode
-	// Up
-	if(code === 38) {
-		speed.up = -1
-	}
-	// Down
-	if(code === 40) {
-		speed.down = 1
-	}
-	// Left
-	if(code === 37) {
-		speed.left = 1
-	}
-	// Right
-	if(code === 39) {
-		speed.right = -1
-	}
-}
-
-/** @param {KeyboardEvent} e */
-function handleKeyUp(e) {
-	let code = e.keyCode
-	// Up
-	if(code === 38) {
-		speed.up = 0
-	}
-	// Down
-	if(code === 40) {
-		speed.down = 0
-	}
-	// Left
-	if(code === 37) {
-		speed.left = 0
-	}
-	// Right
-	if(code === 39) {
-		speed.right = 0
-	}
+	console.log("Camera Initialized")
 }
 
 export function updateCamera(deltaTime) {
 	// Update the camera's position
-	pos.x = pos.x + (speed.left + speed.right) * maxSpeed * deltaTime * canvas.width
-	pos.y = pos.y + (speed.up + speed.down) * maxSpeed * deltaTime * canvas.width
+	pos.x = pos.x + (keys.leftArrow - keys.rightArrow) * speed * deltaTime * canvas.width
+	pos.y = pos.y + (keys.downArrow - keys.upArrow) * speed * deltaTime * canvas.width
 }
 

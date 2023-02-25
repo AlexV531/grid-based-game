@@ -7,8 +7,4 @@ export default class TestComponent extends Component {
 		console.log("Test Component created")
 		
 	}
-
-	update(deltaTime) {
-		
-	}
 }
