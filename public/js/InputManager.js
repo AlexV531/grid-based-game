@@ -7,6 +7,7 @@ let canvas
 
 export let keys = {
 	upArrow:0, downArrow:0, rightArrow:0, leftArrow:0,
+	w:0, a:0, s:0, d:0,
 	z:0, x:0
 }
 
@@ -54,6 +55,22 @@ function handleKeyDown(e) {
 	if(code === 39) {
 		keys.rightArrow = 1
 	}
+	// w
+	if (code === 87) {
+		keys.w = 1
+	}
+	// a
+	if (code === 65) {
+		keys.a = 1
+	}
+	// s
+	if (code === 83) {
+		keys.s = 1
+	}
+	// d
+	if (code === 68) {
+		keys.d = 1
+	}
 	// z
 	if (code === 90) {
 		keys.z = 1
@@ -83,6 +100,22 @@ function handleKeyUp(e) {
 	if(code === 39) {
 		keys.rightArrow = 0
 	}
+	// w
+	if (code === 87) {
+		keys.w = 0
+	}
+	// a
+	if (code === 65) {
+		keys.a = 0
+	}
+	// s
+	if (code === 83) {
+		keys.s = 0
+	}
+	// d
+	if (code === 68) {
+		keys.d = 0
+	}
 	// z
 	if (code === 90) {
 		keys.z = 0
@@ -110,7 +143,7 @@ function handleClick(e) {
 	if(!(mouseTile.x < 0 || mouseTile.y < 0 || mouseTile.x > level.tileMap.getMapSizeX() || mouseTile.y > level.tileMap.getMapSizeY())) {
 		// Move player
 		if(e.shiftKey) {
-			level.gameObjects[0].getComponent(MoveComponent).move(mouseTile.x, mouseTile.y)
+			level.gameObjects[1].getComponent(MoveComponent).move(mouseTile.x, mouseTile.y)
 			return
 		}
 		// Pathfinding tester

@@ -19,11 +19,15 @@ export default class Level {
 		let testComponent = new TestComponent()
 		let spriteComponent = new SpriteComponent(1)
 		let moveComponent = new MoveComponent(this.tileMap)
+		let testObject = new GameObject("test", 2, 2, [testComponent, spriteComponent, moveComponent])
+
+		let spriteComponent2 = new SpriteComponent(1)
 		let playerComponent = new PlayerComponent()
-		let testObject = new GameObject("test", 2, 2, [testComponent, spriteComponent, moveComponent, playerComponent])
+		let moveComponent2 = new MoveComponent(this.tileMap)
+		let playerTestObject = new GameObject("player test", 2.4, 2.4, [spriteComponent2, playerComponent, moveComponent2])
 		
 		// Creating list of game objects
-		this.gameObjects = [testObject]
+		this.gameObjects = [testObject, playerTestObject]
 	}
 
 	update(deltaT) {
