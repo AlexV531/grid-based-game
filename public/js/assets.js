@@ -7,14 +7,24 @@ const tileHighlightList = [
 ]
 const tileHighlights = []
 
+const tileImgList = [
+	"img/grass.png",
+	"img/bricks01.png",
+	"img/bricks02.png"
+]
+const tileImgs = []
+
 const testSpriteImg = "img/test-sprite.png"
 
 export async function loadAssets() {
 	for(let i = 0; i < tileHighlightList.length; i++) {
 		tileHighlights.push(await loadImage(tileHighlightList[i]))
 	}
-	let testSprite = await loadImage(testSpriteImg)
-	return [tileHighlights, testSprite]
+	for(let i = 0; i < tileImgList.length; i++) {
+		tileImgs.push(await loadImage(tileImgList[i]))
+	}
+	const testSprite = await loadImage(testSpriteImg)
+	return [tileHighlights, tileImgs, testSprite]
 }
 
 /** @returns {Promise<HTMLImageElement>} */

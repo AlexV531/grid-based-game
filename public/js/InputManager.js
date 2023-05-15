@@ -19,6 +19,8 @@ export let mouseTile = {
 	x:0, y:0
 }
 
+export let scaleInput = 5
+
 export function initInputManager(cnvs) {
 	canvas = cnvs
 	window.addEventListener('keydown', handleKeyDown)
@@ -78,6 +80,14 @@ function handleKeyDown(e) {
 	// x
 	if (code === 88) {
 		keys.x = 1
+	}
+	// =
+	if (code === 61) {
+		scaleInput += 1
+	}
+	// - 
+	if (code === 173) {
+		scaleInput -= 1
 	}
 }
 
@@ -143,7 +153,7 @@ function handleClick(e) {
 	if(!(mouseTile.x < 0 || mouseTile.y < 0 || mouseTile.x > level.tileMap.getMapSizeX() || mouseTile.y > level.tileMap.getMapSizeY())) {
 		// Move player
 		if(e.shiftKey) {
-			level.gameObjects[1].getComponent(MoveComponent).move(mouseTile.x, mouseTile.y)
+			level.gameObjects[0].getComponent(MoveComponent).move(mouseTile.x, mouseTile.y)
 			return
 		}
 		// Pathfinding tester

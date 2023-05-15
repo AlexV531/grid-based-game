@@ -1,6 +1,6 @@
 export default class Tile {
 
-	constructor(x, y, obstructed) {
+	constructor(x, y, obstructed, tileImageIndex) {
 		this.x = x
 		this.y = y
 		this.obstructed = obstructed
@@ -9,6 +9,7 @@ export default class Tile {
 		this.hCost = 0
 		this.parent = null
 		this.imageIndex = 0
+		this.tileImageIndex = tileImageIndex
 	}
 
 	getX() {
@@ -29,5 +30,9 @@ export default class Tile {
 
 	getImageIndex() {
 		return this.imageIndex
+	}
+
+	getTileImageIndex() {
+		return this.tileImageIndex
 	}
 }

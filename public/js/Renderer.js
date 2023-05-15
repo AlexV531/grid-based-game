@@ -46,6 +46,14 @@ export default class Renderer {
 		// Loop through each row that is visible on the screen
 		for(let y = yStart; y >= yEnd; y--) {
 			// TILE MAP //
+			// Tile images
+			for(let x = xStart; x <= xEnd; x++) {
+				// Each tile has an image index, which is used to find the asset needed to render the tile
+				if(this.tileMap.tileList[x] != null && this.tileMap.tileList[x][y]) {
+					this.context.drawImage(this.assets[1][this.tileMap.tileList[x][y].getTileImageIndex()], x*width, y*width, width, width)
+				}
+			}
+			// Highlights
 			// Loop through each tile in the row
 			for(let x = xStart; x <= xEnd; x++) {
 				// Each tile has an image index, which is used to find the asset needed to render the tile

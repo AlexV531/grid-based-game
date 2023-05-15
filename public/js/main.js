@@ -1,5 +1,6 @@
 import { loadAssets } from './assets.js'
-import { pos, initCamera, updateCamera,  } from './Camera.js'
+import { pos, initCamera, updateCamera } from './Camera.js'
+import { time, updateClock } from './Clock.js'
 import { initInputManager } from './InputManager.js'
 import Renderer from './Renderer.js'
 import Level from './world/Level.js'
@@ -17,7 +18,7 @@ const viewport = {
 let prevT = Date.now()
 
 /** Scene scaling */
-export const SCALE = 10.0
+export const SCALE = 8.0
 /** Background */
 const BG_COLOR = '#000000'
 
@@ -78,8 +79,12 @@ function update() {
 	const curT = Date.now()
 	const deltaT = curT - prevT
 	//const fT = deltaT/1000
+	//SCALE = scaleInput
 
+	updateClock(deltaT)
 	updateCamera(deltaT)
+
+	//console.log(time)
 	
 	if(keys.z == 1) {
 		let obsTile = level.tileMap.getTileAt(mouseTile.x, mouseTile.y)

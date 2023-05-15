@@ -3,13 +3,14 @@ import Tile from './Tile.js'
 // This map currently only works for square layouts for now
 export default class TileMap {
 
-	constructor(size, tileWidth) {
+	constructor(size, tileWidth, map) {
 		this.size = size
+		this.map = map
 		this.tileWidth = tileWidth
 		this.tileList = [...Array(size)].map(e => Array(size))
 		for(var i = 0; i < size; i++) {
 			for(var j = 0; j < size; j++) {
-				this.tileList[i][j] = new Tile(i, j, false)
+				this.tileList[i][j] = new Tile(i, j, false, this.map[i][j])
 			}
 		}
 		// This variable is temporary and is just used to test pathfinding
@@ -36,10 +37,10 @@ export default class TileMap {
 	}
 
 	getTileAt(x, y) {
-		if(!((0 > x || x > this.size - 1) || (0 > y || y > this.size - 1))) {
+		if(!((0 > x || x > this.size - 1 || x % 1 != 0) || (0 > y || y > this.size - 1 || y % 1 != 0))) {
 			return this.tileList[x][y]
 		}
-		return 
+		return
 	}
 
 	update(deltaTime) {
