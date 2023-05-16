@@ -55,6 +55,7 @@ async function initApp() {
 // NEED RENDERER CLASS
 function render() {
 	// Clear the screen
+	context.imageSmoothingEnabled = false;
 	context.beginPath()
 	context.fillStyle = BG_COLOR
 	context.fillRect(0, 0, viewport.width, viewport.height)

@@ -8,13 +8,19 @@ const tileHighlightList = [
 const tileHighlights = []
 
 const tileImgList = [
-	"img/grass.png",
-	"img/bricks01.png",
-	"img/bricks02.png"
+	"img/grass16p.png",
+	"img/bricks0116p.png",
+	"img/bricks0216p.png"
 ]
 const tileImgs = []
 
-const testSpriteImg = "img/test-sprite.png"
+export const tileImgObsList = [
+	false,
+	true,
+	true
+]
+
+const testSpriteImg = "img/test-guy.png"
 
 export async function loadAssets() {
 	for(let i = 0; i < tileHighlightList.length; i++) {

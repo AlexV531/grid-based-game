@@ -1,16 +1,17 @@
 import Tile from './Tile.js'
+import { tileImgObsList } from '../assets.js'
 
 // This map currently only works for square layouts for now
 export default class TileMap {
 
-	constructor(size, tileWidth, map) {
+	constructor(size, tileWidth, spriteMap) {
 		this.size = size
-		this.map = map
+		this.spriteMap = spriteMap
 		this.tileWidth = tileWidth
 		this.tileList = [...Array(size)].map(e => Array(size))
 		for(var i = 0; i < size; i++) {
 			for(var j = 0; j < size; j++) {
-				this.tileList[i][j] = new Tile(i, j, false, this.map[i][j])
+				this.tileList[i][j] = new Tile(i, j, tileImgObsList[this.spriteMap[i][j]], this.spriteMap[i][j])
 			}
 		}
 		// This variable is temporary and is just used to test pathfinding

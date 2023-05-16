@@ -13,7 +13,7 @@ export default class Level {
 		this.levelFile = levelFile
 		
 		// The map is rotated 90 degrees counter clockwise
-		this.map = [
+		this.spriteMap = [
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -39,7 +39,7 @@ export default class Level {
 		// For now there will be one level that is defined here
 
 		// Creating tile map
-		this.tileMap = new TileMap(20, 0.4, this.map)
+		this.tileMap = new TileMap(20, 0.4, this.spriteMap)
 
 		let testComponent = new TestComponent()
 		let spriteComponent = new SpriteComponent(2)
