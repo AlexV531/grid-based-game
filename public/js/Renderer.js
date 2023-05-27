@@ -68,11 +68,15 @@ export default class Renderer {
 			// If so, render it
 			for(let i = 0; i < this.gameObjects.length; i++) {
 				if(Math.floor(this.gameObjects[i].y / width)  == y && Math.floor(this.gameObjects[i].x / width) > xStart && Math.floor(this.gameObjects[i].x / width) < xEnd) {
-					let spriteIndex = this.gameObjects[i].getComponent(SpriteComponent).sprite
-					this.context.drawImage(this.assets[spriteIndex], this.gameObjects[i].x, this.gameObjects[i].y, width, width)
+					let spriteComponent = this.gameObjects[i].getComponent(SpriteComponent)
+					if(spriteComponent != null && spriteComponent.show) {
+						let spriteIndex = spriteComponent.sprite
+						let spriteWidth = spriteComponent.width
+						let spriteHeight = spriteComponent.height
+						this.context.drawImage(this.assets[spriteIndex], this.gameObjects[i].x, this.gameObjects[i].y, spriteWidth, spriteHeight)
+					}
 				}
 			}
 		}
 	}
-
 }

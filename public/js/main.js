@@ -19,6 +19,7 @@ let prevT = Date.now()
 
 /** Scene scaling */
 export const SCALE = 8.0
+export const TILEWIDTH = 0.4
 /** Background */
 const BG_COLOR = '#000000'
 

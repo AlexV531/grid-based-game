@@ -14,6 +14,17 @@ const tileImgList = [
 ]
 const tileImgs = []
 
+const propImgList = [
+	"img/tree.png"
+]
+const propImgs = []
+
+// x offset, y offset, x width, y width, obstructed (a list of tiles this prop obstructs)
+export const propImgInfo = [
+	{xOff:-1, yOff:0, xWid:3, yWidz:4, obs:[]}
+]
+
+
 export const tileImgObsList = [
 	false,
 	true,
@@ -21,6 +32,7 @@ export const tileImgObsList = [
 ]
 
 const testSpriteImg = "img/test-guy.png"
+const roofSpriteImg = "img/roof.png"
 
 export async function loadAssets() {
 	for(let i = 0; i < tileHighlightList.length; i++) {
@@ -29,8 +41,12 @@ export async function loadAssets() {
 	for(let i = 0; i < tileImgList.length; i++) {
 		tileImgs.push(await loadImage(tileImgList[i]))
 	}
+	for(let i = 0; i < propImgList.length; i++) {
+		propImgs.push(await loadImage(propImgList[i]))
+	}
 	const testSprite = await loadImage(testSpriteImg)
-	return [tileHighlights, tileImgs, testSprite]
+	const roofSprite = await loadImage(roofSpriteImg)
+	return [tileHighlights, tileImgs, testSprite, roofSprite]
 }
 
 /** @returns {Promise<HTMLImageElement>} */
