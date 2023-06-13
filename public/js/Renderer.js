@@ -58,8 +58,8 @@ export default class Renderer {
 			for(let x = xStart; x <= xEnd; x++) {
 				// Each tile has an image index, which is used to find the asset needed to render the tile
 				if(this.tileMap.tileList[x] != null && this.tileMap.tileList[x][y]) {
-					if(this.tileMap.tileList[x][y].getImageIndex() > 1) {
-						this.context.drawImage(this.assets[0][this.tileMap.tileList[x][y].getImageIndex()], x*width, y*width, width, width)
+					if(this.tileMap.tileList[x][y].getHighlightImageIndex() > 1) {
+						this.context.drawImage(this.assets[0][this.tileMap.tileList[x][y].getHighlightImageIndex()], x*width, y*width, width, width)
 					}
 				}
 			}

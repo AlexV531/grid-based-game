@@ -10,17 +10,19 @@ const tileHighlights = []
 const tileImgList = [
 	"img/grass16p.png",
 	"img/bricks0116p.png",
-	"img/bricks0216p.png"
+	"img/bricks0216p.png",
+	"img/doorClosed.png",
+	"img/doorOpen.png"
 ]
 const tileImgs = []
 
-const propImgList = [
+const mapObjImgList = [
 	"img/tree.png"
 ]
-const propImgs = []
+const mapObjImgs = []
 
 // x offset, y offset, x width, y width, obstructed (a list of tiles this prop obstructs)
-export const propImgInfo = [
+export const mapObjImgInfo = [
 	{xOff:-1, yOff:0, xWid:3, yWidz:4, obs:[]}
 ]
 
@@ -41,8 +43,8 @@ export async function loadAssets() {
 	for(let i = 0; i < tileImgList.length; i++) {
 		tileImgs.push(await loadImage(tileImgList[i]))
 	}
-	for(let i = 0; i < propImgList.length; i++) {
-		propImgs.push(await loadImage(propImgList[i]))
+	for(let i = 0; i < mapObjImgList.length; i++) {
+		mapObjImgs.push(await loadImage(mapObjImgList[i]))
 	}
 	const testSprite = await loadImage(testSpriteImg)
 	const roofSprite = await loadImage(roofSpriteImg)

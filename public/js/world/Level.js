@@ -7,6 +7,7 @@ import GameObject from '../GameObject.js'
 import TestAIComponent from '../components/TestAIComponent.js'
 import RoofComponent from '../components/RoofComponent.js'
 import { TILEWIDTH } from '../main.js'
+import BuildingComponent from '../components/BuildingComponent.js'
 
 export default class Level {
 
@@ -56,9 +57,10 @@ export default class Level {
 		let testAIComponent = new TestAIComponent()
 		let testAIObject = new GameObject("AI test", 2.8, 2.8, [spriteComponent3, testAIComponent])
 
-		let roofComponent = new RoofComponent(playerTestObject, 1.2, 4, 4.8, 7.2)
 		let spriteComponent4 = new SpriteComponent(3, TILEWIDTH*9, TILEWIDTH*7)
-		let testRoofObject = new GameObject("Roof test", 1.2, 4.4, [roofComponent, spriteComponent4])
+		let roofComponent = new RoofComponent(playerTestObject, 1.2, 4, 4.8, 7.2, spriteComponent4)
+		let buildingComponent = new BuildingComponent([roofComponent], [], [])
+		let testRoofObject = new GameObject("Roof test", 1.2, 4.4, [roofComponent, spriteComponent4, buildingComponent])
 		
 		// Creating list of game objects
 		this.gameObjects = [testObject, playerTestObject, testAIObject, testRoofObject]

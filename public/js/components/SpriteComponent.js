@@ -10,5 +10,6 @@ export default class SpriteComponent extends Component {
 		this.height = height
 		console.log("Sprite Component created")
 		console.log(this.sprite)
+		this.opacity = 1
 	}
 }

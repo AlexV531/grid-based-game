@@ -8,7 +8,7 @@ export default class Tile {
 		this.gCost = 0
 		this.hCost = 0
 		this.parent = null
-		this.imageIndex = 0
+		this.highlightImageIndex = 0
 		this.tileImageIndex = tileImageIndex
 	}
 
@@ -28,8 +28,8 @@ export default class Tile {
 		return this.gCost + this.hCost
 	}
 
-	getImageIndex() {
-		return this.imageIndex
+	getHighlightImageIndex() {
+		return this.highlightImageIndex
 	}
 
 	getTileImageIndex() {

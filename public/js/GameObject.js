@@ -4,6 +4,7 @@ export default class GameObject {
 		this.name = name
 		this.x = x
 		this.y = y
+		this.currNode = null
 		// This is a list of all the components of the game object
 		this.components = components
 		for(let i = 0; i < this.components.length; i++) {

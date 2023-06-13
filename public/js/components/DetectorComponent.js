@@ -21,6 +21,5 @@ export default class DetectorComponent extends Component {
 		} else {
 			this.detected = false
 		}
-		console.log(this.detected)
 	}
 }

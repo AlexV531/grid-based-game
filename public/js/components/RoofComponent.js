@@ -3,22 +3,17 @@ import SpriteComponent from "./SpriteComponent.js";
 
 
 export default class RoofComponent extends DetectorComponent {
-	constructor(gameObject, x1, y1, x2, y2) {
+	constructor(gameObject, x1, y1, x2, y2, spriteComponent) {
 		super(gameObject, x1, y1, x2, y2)
-		this.spriteComponent = 0
+		this.spriteComponent = spriteComponent
 	}
 
-	update(deltaTime) {
-		super.update(deltaTime)
-		if(this.spriteComponent == 0) { // Initialize sprite component
-			this.spriteComponent = this.parent.getComponent(SpriteComponent)
-		}
-		if(this.spriteComponent != null) {
-			if(this.detected) {
-				this.spriteComponent.show = false
-			} else {
-				this.spriteComponent.show = true
-			}
+	// status is true or false
+	show(status) {
+		
+		if(this.spriteComponent instanceof SpriteComponent) {
+			console.log(status)
+			this.spriteComponent.show = status
 		}
 	}
 }
