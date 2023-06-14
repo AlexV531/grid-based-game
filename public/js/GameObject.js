@@ -25,6 +25,7 @@ export default class GameObject {
 		}
 	}
 
+	// Returns one component of a specified type
 	getComponent(type) {
 		for(let i = 0; i < this.components.length; i++) {
 			if(this.components[i] instanceof type) {
@@ -32,5 +33,20 @@ export default class GameObject {
 			}
 		}
 		return null
+	}
+
+	// Returns all components of a specified type
+	getAllComponents(type) {
+		let componentList = []
+		for(let i = 0; i < this.components.length; i++) {
+			if(this.components[i] instanceof type) {
+				componentList.push(this.components[i])
+			}
+		}
+		if(componentList.length <= 0) {
+			return null
+		} else {
+			return componentList
+		}
 	}
 }

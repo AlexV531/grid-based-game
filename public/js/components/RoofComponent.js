@@ -10,9 +10,7 @@ export default class RoofComponent extends DetectorComponent {
 
 	// status is true or false
 	show(status) {
-		
 		if(this.spriteComponent instanceof SpriteComponent) {
-			console.log(status)
 			this.spriteComponent.show = status
 		}
 	}
