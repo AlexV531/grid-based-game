@@ -10,6 +10,7 @@ export default class Tile {
 		this.parent = null
 		this.highlightImageIndex = 0
 		this.tileImageIndex = tileImageIndex
+		this.associatedObject = null
 	}
 
 	getX() {

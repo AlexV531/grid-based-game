@@ -44,6 +44,7 @@ export default class Renderer {
 		// xStart is at the left side of the canvas, xEnd is at the right.
 
 		// Loop through each row that is visible on the screen
+
 		for(let y = yStart; y >= yEnd; y--) {
 			// TILE MAP //
 			// Tile images
@@ -63,6 +64,9 @@ export default class Renderer {
 					}
 				}
 			}
+		}
+
+		for(let y = yStart; y >= yEnd; y--) {
 			// GAME OBJECTS //
 			// Loop through each game object, check if it is on the current row
 			// If so, render it
@@ -75,7 +79,13 @@ export default class Renderer {
 								let spriteIndex = spriteComponents[j].sprite
 								let spriteWidth = spriteComponents[j].width
 								let spriteHeight = spriteComponents[j].height
-								this.context.drawImage(this.assets[spriteIndex], this.gameObjects[i].x, this.gameObjects[i].y, spriteWidth, spriteHeight)
+								
+								// If the position is null then use the gameobject position
+								if(spriteComponents[j].pos == null) {
+									this.context.drawImage(this.assets[2][spriteIndex], this.gameObjects[i].x, this.gameObjects[i].y, spriteWidth, spriteHeight)
+								} else {
+									this.context.drawImage(this.assets[2][spriteIndex], spriteComponents[j].pos.x, spriteComponents[j].pos.y, spriteWidth, spriteHeight)
+								}
 							}
 						}
 					}

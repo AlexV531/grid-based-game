@@ -8,6 +8,7 @@ import TestAIComponent from '../components/TestAIComponent.js'
 import RoofComponent from '../components/RoofComponent.js'
 import { TILEWIDTH } from '../main.js'
 import BuildingComponent from '../components/BuildingComponent.js'
+import DoorComponent from '../components/DoorComponent.js'
 
 export default class Level {
 
@@ -45,25 +46,28 @@ export default class Level {
 		this.tileMap = new TileMap(20, TILEWIDTH, this.spriteMap)
 
 		let testComponent = new TestComponent()
-		let spriteComponent = new SpriteComponent(2, TILEWIDTH, TILEWIDTH)
+		let spriteComponent = new SpriteComponent(0, null, TILEWIDTH, TILEWIDTH)
 		let moveComponent = new MoveComponent(this.tileMap)
 		let testObject = new GameObject("test", 2, 2, [testComponent, spriteComponent, moveComponent])
 
-		let spriteComponent2 = new SpriteComponent(2, TILEWIDTH, TILEWIDTH)
+		let spriteComponent2 = new SpriteComponent(0, null, TILEWIDTH, TILEWIDTH)
 		let playerComponent = new PlayerComponent()
 		let playerTestObject = new GameObject("player test", 2.4, 2.4, [spriteComponent2, playerComponent])
 
-		let spriteComponent3 = new SpriteComponent(2, TILEWIDTH, TILEWIDTH)
+		let spriteComponent3 = new SpriteComponent(0, null, TILEWIDTH, TILEWIDTH)
 		let testAIComponent = new TestAIComponent()
 		let testAIObject = new GameObject("AI test", 2.8, 2.8, [spriteComponent3, testAIComponent])
 
-		let spriteComponent4 = new SpriteComponent(3, TILEWIDTH*9, TILEWIDTH*7)
-		let roofComponent = new RoofComponent(playerTestObject, 1.2, 4, 4.8, 7.2, spriteComponent4)
-		let buildingComponent = new BuildingComponent([roofComponent], [], [])
-		let testRoofObject = new GameObject("Roof test", 1.2, 4.4, [roofComponent, spriteComponent4, buildingComponent])
 		
+		let spriteComponent4 = new SpriteComponent(1, {x:1.2, y:4.4}, TILEWIDTH*9, TILEWIDTH*7)
+		let spriteComponent6 = new SpriteComponent(2, {x:2, y:4}, TILEWIDTH, TILEWIDTH)
+		let roofComponent = new RoofComponent(playerTestObject, 1.2, 4, 4.8, 7.2, spriteComponent4)
+		let doorComponent = new DoorComponent(playerTestObject, 2, 4, 2.4, 4.4, spriteComponent6, 2, 3)
+		let buildingComponent = new BuildingComponent([roofComponent], [doorComponent], [])
+		let testBuildingObject = new GameObject("Building test", 1.2, 4.4, [spriteComponent4, spriteComponent6, roofComponent, doorComponent, buildingComponent])
+
 		// Creating list of game objects
-		this.gameObjects = [testObject, playerTestObject, testAIObject, testRoofObject]
+		this.gameObjects = [testObject, playerTestObject, testAIObject, testBuildingObject]
 	}
 
 	update(deltaT) {
