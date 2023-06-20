@@ -1,17 +1,40 @@
 import Tile from './Tile.js'
-import { tileImgObsList } from '../assets.js'
+import { tileImgObsList, propImgInfo } from '../assets.js'
 
 // This map currently only works for square layouts for now
 export default class TileMap {
 
-	constructor(size, tileWidth, spriteMap) {
+	constructor(size, tileWidth, spriteMap, propMap) {
 		this.size = size
-		this.spriteMap = spriteMap
 		this.tileWidth = tileWidth
 		this.tileList = [...Array(size)].map(e => Array(size))
+		let tempObstructed = []
+		// Create a 2D array of the size of the tilemap and set them all to false
+		for(var i = 0; i < size; i++) {
+			tempObstructed.push([])
+			for(var j = 0; j < size; j++) {
+				tempObstructed[i].push(false)
+			}
+		}
+		// Determining which tiles are obstructed due to props
+		// using tileImgInfo, which has a list of nodes that are obstructed by the prop.
+		// The obstructed nodes positions are given with x and y offsets from the
+		// prop's origin
 		for(var i = 0; i < size; i++) {
 			for(var j = 0; j < size; j++) {
-				this.tileList[i][j] = new Tile(i, j, tileImgObsList[this.spriteMap[i][j]], this.spriteMap[i][j])
+				if(propMap[i][j] != 0) {
+					for(var k = 0; k < propImgInfo[propMap[i][j]].obs.length; k++) {
+						tempObstructed[i+propImgInfo[propMap[i][j]].obs[k].xOff][j+propImgInfo[propMap[i][j]].obs[k].yOff] = true
+					}
+				}
+			}
+		}
+		console.log(tempObstructed)
+		for(var i = 0; i < size; i++) {
+			for(var j = 0; j < size; j++) {
+				// Combining the obstacles caused by props and obstacles caused by tiles
+				tempObstructed[i][j] = tempObstructed[i][j] || tileImgObsList[spriteMap[i][j]]
+				this.tileList[i][j] = new Tile(i, j, tempObstructed[i][j], spriteMap[i][j])
 			}
 		}
 		// This variable is temporary and is just used to test pathfinding

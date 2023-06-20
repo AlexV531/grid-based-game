@@ -1,10 +1,9 @@
 import { loadAssets } from './assets.js'
 import { pos, initCamera, updateCamera } from './Camera.js'
-import { time, updateClock } from './Clock.js'
-import { initInputManager } from './InputManager.js'
+import { updateClock } from './Clock.js'
+import { initInputManager, keysPressed, resetInputManager } from './InputManager.js'
 import Renderer from './Renderer.js'
 import Level from './world/Level.js'
-import { keys, mouseTile } from './InputManager.js'
 
 /** @type {HTMLCanvasElement} */
 const canvas = document.querySelector('canvas.main-canvas')
@@ -24,7 +23,7 @@ export const TILEWIDTH = 0.4
 const BG_COLOR = '#000000'
 
 let testOnce = true
-
+let paused = false
 export let level
 let renderer
 
@@ -83,11 +82,14 @@ function update() {
 	//const fT = deltaT/1000
 	//SCALE = scaleInput
 
-	updateClock(deltaT)
-	updateCamera(deltaT)
+	if(!paused) {
+		updateClock(deltaT)
+		updateCamera(deltaT)
+	}
 
 	//console.log(time)
 	
+	/*
 	if(keys.z == 1) {
 		let obsTile = level.tileMap.getTileAt(mouseTile.x, mouseTile.y)
 		if(obsTile != null) {
@@ -100,12 +102,25 @@ function update() {
 			obsTile.obstructed = false
 		}
 	}
+	*/
+	if(keysPressed.p) {
+		console.log("test")
+		if(paused) {
+			paused = false
+		} else {
+			paused = true
+		}
+	}
 
-	level.update(deltaT)
+	if(!paused) {
+		level.update(deltaT)
+	}
 
 	if(testOnce) {
 		testOnce = false
 	}
+
+	resetInputManager()
 
 	prevT = curT
 	render()

@@ -1,6 +1,7 @@
 import SpriteComponent from "./components/SpriteComponent.js"
 import { pos } from './Camera.js'
 import { SCALE } from './main.js'
+import { propImgInfo as propImgInfo } from "./assets.js"
 
 export default class Renderer {
 
@@ -10,10 +11,7 @@ export default class Renderer {
 		this.assets = assets
 		this.level = level
 		this.tileMap = level.tileMap
-
-		// This line is just for testing the tilemap render (without level class implemented yet)
-		//this.tileMap = level
-
+		this.propMap = level.propMap
 		this.gameObjects = level.gameObjects
 	}
 
@@ -21,6 +19,7 @@ export default class Renderer {
 	switchLevel(level) {
 		this.level = level
 		this.tileMap = level.tileMap
+		this.propMap = level.propMap
 		this.gameObjects = level.gameObjects
 	}
 
@@ -33,7 +32,7 @@ export default class Renderer {
 		let width = this.tileMap.tileWidth
 		// This buffer makes the renderer draw tiles and game objects 2 tiles off screen to 
 		// avoid game objects disappearing if their origin point is off screen
-		let buffer = 2
+		let buffer = 3
 		
 		// Only render things that are visible to the camera
 		let yStart = Math.floor(((-pos.y + this.canvas.height) / (this.canvas.width / SCALE)) / width) + buffer
@@ -44,29 +43,20 @@ export default class Renderer {
 		// xStart is at the left side of the canvas, xEnd is at the right.
 
 		// Loop through each row that is visible on the screen
-
 		for(let y = yStart; y >= yEnd; y--) {
 			// TILE MAP //
-			// Tile images
+			// Tile images are rendered first because they are behind everything
 			for(let x = xStart; x <= xEnd; x++) {
 				// Each tile has an image index, which is used to find the asset needed to render the tile
 				if(this.tileMap.tileList[x] != null && this.tileMap.tileList[x][y]) {
-					this.context.drawImage(this.assets[1][this.tileMap.tileList[x][y].getTileImageIndex()], x*width, y*width, width, width)
-				}
-			}
-			// Highlights
-			// Loop through each tile in the row
-			for(let x = xStart; x <= xEnd; x++) {
-				// Each tile has an image index, which is used to find the asset needed to render the tile
-				if(this.tileMap.tileList[x] != null && this.tileMap.tileList[x][y]) {
-					if(this.tileMap.tileList[x][y].getHighlightImageIndex() > 1) {
-						this.context.drawImage(this.assets[0][this.tileMap.tileList[x][y].getHighlightImageIndex()], x*width, y*width, width, width)
-					}
+					this.context.drawImage(this.assets[0][this.tileMap.tileList[x][y].getTileImageIndex()], x*width, y*width, width, width)
 				}
 			}
 		}
 
+		// Loop through each row that is visible on the screen
 		for(let y = yStart; y >= yEnd; y--) {
+			
 			// GAME OBJECTS //
 			// Loop through each game object, check if it is on the current row
 			// If so, render it
@@ -82,13 +72,25 @@ export default class Renderer {
 								
 								// If the position is null then use the gameobject position
 								if(spriteComponents[j].pos == null) {
-									this.context.drawImage(this.assets[2][spriteIndex], this.gameObjects[i].x, this.gameObjects[i].y, spriteWidth, spriteHeight)
+									this.context.drawImage(this.assets[1][spriteIndex], this.gameObjects[i].x, this.gameObjects[i].y, spriteWidth, spriteHeight)
 								} else {
-									this.context.drawImage(this.assets[2][spriteIndex], spriteComponents[j].pos.x, spriteComponents[j].pos.y, spriteWidth, spriteHeight)
+									this.context.drawImage(this.assets[1][spriteIndex], spriteComponents[j].pos.x, spriteComponents[j].pos.y, spriteWidth, spriteHeight)
 								}
 							}
 						}
 					}
+				}
+			}
+
+			// PROPS
+			for(let x = xStart; x <= xEnd; x++) {
+				if(this.propMap[x] != null && this.propMap[x][y] && this.propMap[x][y] != 0) {
+					let propIndex = this.propMap[x][y]
+					this.context.drawImage(this.assets[2][propIndex], 
+						(x + propImgInfo[propIndex].xOff)*width, 
+						(y + propImgInfo[propIndex].yOff)*width, 
+						propImgInfo[propIndex].xWid*width, 
+						propImgInfo[propIndex].yWid*width)
 				}
 			}
 		}

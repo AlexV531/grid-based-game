@@ -22,13 +22,13 @@ export default class Level {
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0],
-			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 3, 3, 3, 3, 2, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 2, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 3, 3, 3, 3, 2, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 3, 3, 3, 3, 2, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 3, 3, 3, 3, 2, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 3, 3, 3, 3, 2, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 3, 3, 3, 3, 2, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -40,19 +40,39 @@ export default class Level {
 			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 		]
 
+		this.propMap = [
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+		]
+
 		// For now there will be one level that is defined here
 
 		// Creating tile map
-		this.tileMap = new TileMap(20, TILEWIDTH, this.spriteMap)
+		this.tileMap = new TileMap(20, TILEWIDTH, this.spriteMap, this.propMap)
 
 		let testComponent = new TestComponent()
 		let spriteComponent = new SpriteComponent(0, null, TILEWIDTH, TILEWIDTH)
 		let moveComponent = new MoveComponent(this.tileMap)
-		let testObject = new GameObject("test", 2, 2, [testComponent, spriteComponent, moveComponent])
-
-		let spriteComponent2 = new SpriteComponent(0, null, TILEWIDTH, TILEWIDTH)
 		let playerComponent = new PlayerComponent()
-		let playerTestObject = new GameObject("player test", 2.4, 2.4, [spriteComponent2, playerComponent])
+		let testObject = new GameObject("test", 2, 2, [testComponent, spriteComponent, moveComponent, playerComponent])
 
 		let spriteComponent3 = new SpriteComponent(0, null, TILEWIDTH, TILEWIDTH)
 		let testAIComponent = new TestAIComponent()
@@ -61,13 +81,13 @@ export default class Level {
 		
 		let spriteComponent4 = new SpriteComponent(1, {x:1.2, y:4.4}, TILEWIDTH*9, TILEWIDTH*7)
 		let spriteComponent6 = new SpriteComponent(2, {x:2, y:4}, TILEWIDTH, TILEWIDTH)
-		let roofComponent = new RoofComponent(playerTestObject, 1.2, 4, 4.8, 7.2, spriteComponent4)
-		let doorComponent = new DoorComponent(playerTestObject, 2, 4, 2.4, 4.4, spriteComponent6, 2, 3)
+		let roofComponent = new RoofComponent([testObject, testAIComponent], 1.2, 4, 4.8, 7.2, spriteComponent4)
+		let doorComponent = new DoorComponent([testObject, testAIComponent], 2, 4, 2.4, 4.4, spriteComponent6, 2, 3)
 		let buildingComponent = new BuildingComponent([roofComponent], [doorComponent], [])
 		let testBuildingObject = new GameObject("Building test", 1.2, 4.4, [spriteComponent4, spriteComponent6, roofComponent, doorComponent, buildingComponent])
 
 		// Creating list of game objects
-		this.gameObjects = [testObject, playerTestObject, testAIObject, testBuildingObject]
+		this.gameObjects = [testObject, testAIObject, testBuildingObject]
 	}
 
 	update(deltaT) {

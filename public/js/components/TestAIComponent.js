@@ -5,7 +5,6 @@ export default class TestAIComponent extends AIComponent {
 
 	constructor() {
 		super()
-
 	}
 
 	update(deltaTime) {

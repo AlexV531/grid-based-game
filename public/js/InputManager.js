@@ -1,14 +1,16 @@
 import { pos } from './Camera.js'
 import { level, SCALE } from './main.js'
-import { findPath } from './world/Pathfinding.js'
-import MoveComponent from './components/MoveComponent.js'
 
 let canvas
 
 export let keys = {
 	upArrow:0, downArrow:0, rightArrow:0, leftArrow:0,
 	w:0, a:0, s:0, d:0,
-	z:0, x:0
+	p:0, z:0, x:0
+}
+
+export let keysPressed = {
+	p:false
 }
 
 export let mouse = {
@@ -18,6 +20,8 @@ export let mouse = {
 export let mouseTile = {
 	x:0, y:0
 }
+
+export let mouseClicked = false
 
 export let scaleInput = 5
 
@@ -30,12 +34,9 @@ export function initInputManager(cnvs) {
 	console.log("Input Manager Initialized")
 }
 
-// For test display purposes
-let startTest = {
-	x:null, y:null
-}
-let targetTest = {
-	x:null, y:null
+export function resetInputManager() {
+	mouseClicked = false
+	keysPressed.p = false
 }
 
 /** @param {KeyboardEvent} e */
@@ -72,6 +73,10 @@ function handleKeyDown(e) {
 	// d
 	if (code === 68) {
 		keys.d = 1
+	}
+	//p
+	if (code === 80) {
+		keys.p = 1
 	}
 	// z
 	if (code === 90) {
@@ -126,6 +131,11 @@ function handleKeyUp(e) {
 	if (code === 68) {
 		keys.d = 0
 	}
+	//p
+	if (code === 80) {
+		keys.p = 0
+		keysPressed.p = true
+	}
 	// z
 	if (code === 90) {
 		keys.z = 0
@@ -151,29 +161,6 @@ function handleMouseMove(e) {
 /** @param {MouseEvent} e */
 function handleClick(e) {
 	if(!(mouseTile.x < 0 || mouseTile.y < 0 || mouseTile.x > level.tileMap.getMapSizeX() || mouseTile.y > level.tileMap.getMapSizeY())) {
-		// Move player
-		if(e.shiftKey) {
-			level.gameObjects[0].getComponent(MoveComponent).move(mouseTile.x, mouseTile.y)
-			return
-		}
-		// Pathfinding tester
-		if(startTest.x === null) {
-			startTest.x = mouseTile.x
-			startTest.y = mouseTile.y
-			level.tileMap.start.x = mouseTile.x
-			level.tileMap.start.y = mouseTile.y
-			level.tileMap.testPath = []
-		} else if(targetTest.x === null) {
-			targetTest.x = mouseTile.x
-			targetTest.y = mouseTile.y
-			level.tileMap.testPath = findPath(level.tileMap, startTest.x, startTest.y, targetTest.x, targetTest.y)
-		} else {
-			startTest.x = mouseTile.x
-			startTest.y = mouseTile.y
-			level.tileMap.start.x = mouseTile.x
-			level.tileMap.start.y = mouseTile.y
-			level.tileMap.testPath = []
-			targetTest.x = null
-		}
+		mouseClicked = true
 	}
 }

@@ -1,16 +1,9 @@
 
-const tileHighlightList = [
-	"img/selected-tile-grey.png",
-	"img/selected-tile-red.png",
-	"img/selected-tile-green.png",
-	"img/selected-tile-blue.png"
-]
-const tileHighlights = []
-
 const tileImgList = [
 	"img/grass16p.png",
 	"img/bricks0116p.png",
 	"img/bricks0216p.png",
+	"img/floor01.png"
 ]
 const tileImgs = []
 export const tileImgObsList = [
@@ -27,30 +20,31 @@ const spriteImgList = [
 ]
 const spriteImgs = []
 
-const mapObjImgList = [
+const propImgList = [
 	"img/tree.png"
 ]
-const mapObjImgs = []
+const propImgs = []
 
 // x offset, y offset, x width, y width, obstructed (a list of tiles this prop obstructs)
-export const mapObjImgInfo = [
-	{xOff:-1, yOff:0, xWid:3, yWidz:4, obs:[]}
+export const propImgInfo = [
+	// First one is for null entry at 0, ignore it
+	{xOff:0, yOff:0, xWid:1, yWid:1, obs:[]},
+	// List starts here
+	{xOff:-1, yOff:0, xWid:3, yWid:4, obs:[{xOff:0, yOff:0}]}
 ]
 
 export async function loadAssets() {
-	for(let i = 0; i < tileHighlightList.length; i++) {
-		tileHighlights.push(await loadImage(tileHighlightList[i]))
-	}
 	for(let i = 0; i < tileImgList.length; i++) {
 		tileImgs.push(await loadImage(tileImgList[i]))
 	}
 	for(let i = 0; i < spriteImgList.length; i++) {
 		spriteImgs.push(await loadImage(spriteImgList[i]))
 	}
-	for(let i = 0; i < mapObjImgList.length; i++) {
-		mapObjImgs.push(await loadImage(mapObjImgList[i]))
+	propImgs.push(null)
+	for(let i = 0; i < propImgList.length; i++) {
+		propImgs.push(await loadImage(propImgList[i]))
 	}
-	return [tileHighlights, tileImgs, spriteImgs]
+	return [tileImgs, spriteImgs, propImgs]
 }
 
 /** @returns {Promise<HTMLImageElement>} */
