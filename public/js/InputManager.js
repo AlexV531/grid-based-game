@@ -6,11 +6,11 @@ let canvas
 export let keys = {
 	upArrow:0, downArrow:0, rightArrow:0, leftArrow:0,
 	w:0, a:0, s:0, d:0,
-	p:0, z:0, x:0
+	o:0, p:0, l:0, z:0, x:0
 }
 
 export let keysPressed = {
-	p:false
+	p:false, o:false, l:false
 }
 
 export let mouse = {
@@ -36,7 +36,9 @@ export function initInputManager(cnvs) {
 
 export function resetInputManager() {
 	mouseClicked = false
+	keysPressed.o = false
 	keysPressed.p = false
+	keysPressed.l = false
 }
 
 /** @param {KeyboardEvent} e */
@@ -74,9 +76,17 @@ function handleKeyDown(e) {
 	if (code === 68) {
 		keys.d = 1
 	}
+	//o
+	if (code === 79) {
+		keys.o = 1
+	}
 	//p
 	if (code === 80) {
 		keys.p = 1
+	}
+	//l
+	if (code === 76) {
+		keys.l = 1
 	}
 	// z
 	if (code === 90) {
@@ -131,10 +141,20 @@ function handleKeyUp(e) {
 	if (code === 68) {
 		keys.d = 0
 	}
+	//o
+	if (code === 79) {
+		keys.o = 0
+		keysPressed.o = true
+	}
 	//p
 	if (code === 80) {
 		keys.p = 0
 		keysPressed.p = true
+	}
+	//l
+	if (code === 76) {
+		keys.l = 0
+		keysPressed.l = true
 	}
 	// z
 	if (code === 90) {

@@ -13,7 +13,7 @@ export default class AIComponent extends Component {
 		// schedule[x][0] = startTime
 		// schedule[x][1] = endTime
 		// schedule[x][2] = action
-		this.schedule = [[0, 2, "Action 1"], [2, dayLength, "Action 2"]]
+		this.schedule = [[0, 2, this.defaultAction], [2, dayLength, this.defaultAction2]]
 	}
 
 	changeSchedule(newSchedule) {
@@ -32,10 +32,17 @@ export default class AIComponent extends Component {
 		// Find the correct schedule item based on the time
 		for(let i = 0; i < this.schedule.length; i++) {
 			if(this.schedule[i][0] <= time && time < this.schedule[i][1]) {
-				// Do action in that schedule item
-				//console.log(this.schedule[i][2])
+				this.schedule[i][2]()
 				break
 			}
 		}
+	}
+
+	defaultAction() {
+		//console.log("Doing default action")
+	}
+
+	defaultAction2() {
+		//console.log("Doing default action 2")
 	}
 }

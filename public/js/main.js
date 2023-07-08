@@ -3,6 +3,7 @@ import { pos, initCamera, updateCamera } from './Camera.js'
 import { updateClock } from './Clock.js'
 import { initInputManager, keysPressed, resetInputManager } from './InputManager.js'
 import Renderer from './Renderer.js'
+import { updateUI } from './UIManager.js'
 import Level from './world/Level.js'
 
 /** @type {HTMLCanvasElement} */
@@ -35,6 +36,22 @@ function resize() {
 	canvas.width = viewport.width = rc.width
 	canvas.height = viewport.height = rc.height
 	render()
+}
+
+export function togglePauseGame() {
+	if(paused) {
+		paused = false
+	} else {
+		paused = true
+	}
+}
+
+export function pauseGame() {
+	paused = true
+}
+
+export function unpauseGame() {
+	paused = false
 }
 
 
@@ -86,6 +103,7 @@ function update() {
 		updateClock(deltaT)
 		updateCamera(deltaT)
 	}
+	updateUI(deltaT)
 
 	//console.log(time)
 	
@@ -104,12 +122,7 @@ function update() {
 	}
 	*/
 	if(keysPressed.p) {
-		console.log("test")
-		if(paused) {
-			paused = false
-		} else {
-			paused = true
-		}
+		togglePauseGame()
 	}
 
 	if(!paused) {
