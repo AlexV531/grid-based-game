@@ -6,7 +6,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 		<link type="text/css" rel="stylesheet" href="css/style.css"/>
 		<script type="module" src="js/main.js" defer></script>
-		<script type="text/javascript" src="js/script.js"></script>
+		<script>
+			window.dialogue = { optionChosen: -1 };
+		</script>
 	</head>
 	<body>
 		<div class="container">
@@ -23,7 +25,7 @@
 				</div>
 				<div id="dialogue-bottom">
 					<div id="dialogue-options">
-						<div class="dialogue-option" onclick="testOnClick('testing')"><span class="highlight">Test text 1</span></div>
+						<div class="dialogue-option"><span class="highlight">Test text 1</span></div>
 						<div class="dialogue-option"><span class="highlight">Test text 2</span></div>
 						<div class="dialogue-option"><span class="highlight">Test text 3</span></div>
 						<div class="dialogue-option"><span class="highlight">Test text 4</span></div>

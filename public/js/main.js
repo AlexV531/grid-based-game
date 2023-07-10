@@ -25,6 +25,7 @@ const BG_COLOR = '#000000'
 
 let testOnce = true
 let paused = false
+let dialoguePaused = false
 export let level
 let renderer
 
@@ -105,22 +106,6 @@ function update() {
 	}
 	updateUI(deltaT)
 
-	//console.log(time)
-	
-	/*
-	if(keys.z == 1) {
-		let obsTile = level.tileMap.getTileAt(mouseTile.x, mouseTile.y)
-		if(obsTile != null) {
-			obsTile.obstructed = true
-		}
-	}
-	else if(keys.x == 1) {
-		let obsTile = level.tileMap.getTileAt(mouseTile.x, mouseTile.y)
-		if(obsTile != null) {
-			obsTile.obstructed = false
-		}
-	}
-	*/
 	if(keysPressed.p) {
 		togglePauseGame()
 	}
