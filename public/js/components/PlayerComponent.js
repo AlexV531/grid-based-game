@@ -1,5 +1,6 @@
 import Component from "../Component.js";
 import { mouseTile, mouseClicked } from "../InputManager.js"
+import { isDialoguePaused } from "../main.js";
 import MoveComponent from "./MoveComponent.js";
 
 
@@ -12,7 +13,7 @@ export default class PlayerComponent extends Component {
 	}
 
 	update(deltaTime) {
-		if(mouseClicked) {
+		if(mouseClicked && !isDialoguePaused()) {
 			this.parent.getComponent(MoveComponent).move(mouseTile.x, mouseTile.y)
 		}
 	}

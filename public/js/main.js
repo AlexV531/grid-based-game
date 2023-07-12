@@ -53,8 +53,21 @@ export function pauseGame() {
 
 export function unpauseGame() {
 	paused = false
+	// Undoing any accidental dialogue option clicks while paused
+	window.dialogue.optionChosen = -1
 }
 
+export function dialoguePause() {
+	dialoguePaused = true
+}
+
+export function dialogueUnpause() {
+	dialoguePaused = false
+}
+
+export function isDialoguePaused() {
+	return dialoguePaused
+}
 
 /** Call this once on application startup */
 async function initApp() {
